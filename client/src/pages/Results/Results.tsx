@@ -28,7 +28,7 @@ export default function Results({isLoading, data}) {
         {data?.country}
       </p>
 
-      <ul className="list">
+      <ul className="mb-[90px]">
         {Object.entries(data?.places[0]).map(([key, val], index) => (
           <li
             key={index}
