@@ -12,6 +12,13 @@ export default {
       geoRed: "#E54533",
       geoPink: "#96574F",
       geoPalePink: "#9C8A88",
+      locaDark: "#1E1E1E",
+      locaMid: "#262626",
+      locaMidLight: "#484848",
+      locaMidAlt:"#404040",
+      locaLight: "#303030",
+      locaMed:"#B3B3B3",
+      locaWhite: "#FAFAFA",
     },
     fontFamily: {
       sans: ["Plus Jakarta Sans"],
