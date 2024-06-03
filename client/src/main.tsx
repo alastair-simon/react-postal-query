@@ -8,11 +8,6 @@ import Results from "./pages/Results/Results";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/results" element={<Results/>}></Route>
-      </Routes>
-    </Router>
+    <Home/>
   </React.StrictMode>
 );
