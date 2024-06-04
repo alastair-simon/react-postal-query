@@ -3,14 +3,15 @@ import k from "../../assets/k.svg";
 import search from "../../assets/search.svg";
 
 type propsType = {
-    searchOpen: boolean;
-    setSearchOpen:(isOpen: boolean) => void;
+  searchOpen: boolean;
+  setSearchOpen: (isOpen: boolean) => void;
+  setIsError:(isError:boolean)=> void
 }
 
-export default function Button({ searchOpen, setSearchOpen }:propsType) {
+export default function Button({ searchOpen, setSearchOpen, setIsError }:propsType) {
   return (
     <button
-      onClick={() => setSearchOpen(!searchOpen)}
+      onClick={() => { setSearchOpen(!searchOpen); setIsError(false) }}
       className="w-full h-[40px] mb-[55px] pl-[10px] pr-[10px] bg-locaLight hover:bg-locaMidLight border-[1px] border-locaMidLight rounded-[8px] flex flex-row items-center justify-between focus:outline-none"
     >
       <div className="flex flex-row gap-2">
