@@ -1,19 +1,35 @@
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import './Map.css'
+import "./Map.css";
 
-export default function MyMapComponent({ long, lat }) {
-  const position = [52.5167, 13.4]; // Using the passed latitude and longitude
+type propsType = {
+  latitude: string | null;
+  longitude: string | null;
+};
+
+export default function MyMapComponent ({ latitude, longitude }:propsType) {
+  //fallback position
+  const defaultPosition: [number, number] = [51.505, -0.09];
+
+  //check if long and lat are there
+  const position: [number, number] = latitude && longitude ? [parseFloat(latitude), parseFloat(longitude)] : defaultPosition;
+
+  //update map every time lat and long changed
+  const MapUpdater: React.FC<{ position: [number, number] }> = ({position}) => {
+    const map = useMap();
+    useEffect(() => {
+      map.setView(position);
+    }, [position, map]);
+    return null;
+  };
 
   return (
-    <MapContainer
-      center={position}
-      zoom={13}
-      style={{}}
-      className="mapStyles"
-    >
+    <MapContainer center={position} zoom={13} className="mapStyles">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={position}></Marker>
+      <MapUpdater position={position} />
     </MapContainer>
   );
-}
+};
+

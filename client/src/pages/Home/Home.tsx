@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
+import { useFetchPostalCodeData } from "../../hooks/useFetchPostalCode";
+import { SearchType } from "../../types/SearchType";
+//components
 import SearchForm from "../../components/SearchForm/SearchForm";
 import Results from "../Results/Results";
-import { useFetchPostalCodeData } from "../../hooks/useFetchPostalCode";
 import SearchList from "../../components/SearchList/SearchList";
-import ctrl from "../../assets/ctrl.svg"
-import k from "../../assets/k.svg"
-import search from "../../assets/search.svg"
+import Button from "../../components/Button/Button";
 
 export default function Home() {
 
-  const [postcode, setPostcode] = useState("");
-  const [country, setCountry] = useState("US");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [postcode, setPostcode] = useState<string>("");
+  const [country, setCountry] = useState<string>("US");
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<SearchType | null>(null);
   const { isLoading, fetchData, searchList } = useFetchPostalCodeData();
 
-  useEffect(() => {
-    console.log(searchList)
-  },[searchList])
-
-  function handleSubmit(e) {
+  function handleSubmit(e:FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (country && postcode) {
       fetchData(country, postcode, setSelected);
@@ -28,6 +24,18 @@ export default function Home() {
       setSearchOpen(!searchOpen);
     }
   }
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        setSearchOpen(!searchOpen);
+      }
+    };
+    document.body.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [searchOpen]);
 
   return (
     <div className="w-full">
@@ -38,26 +46,19 @@ export default function Home() {
           country={country}
           setCountry={setCountry}
           onSubmit={handleSubmit}
+          setSearchOpen={setSearchOpen}
         />
       )}
       <div
         id="sidebar"
-        className="w-[320px] h-screen fixed pl-[15px] pr-[15px] pt-[40px] bg-locaDark border-r-[1.5px] border-locaMidAlt"
+        className="w-[320px] h-screen fixed pl-[15px] pr-[15px] pt-[40px] z-40 bg-locaDark border-r-[1.5px] border-locaMidAlt"
       >
-        <button
-          onClick={() => setSearchOpen(!searchOpen)}
-          className="w-full h-[40px] mb-[55px] pl-[10px] pr-[10px] bg-locaLight border-[1px] border-locaMidLight rounded-[8px] flex flex-row items-center justify-between"
-        >
-          <div className="flex flex-row gap-2">
-            <img src={search}></img>
-            <p className="text-locaMed">Search</p>
-          </div>
-          <div className="flex flex-row gap-2">
-            <img src={k} className="w-[25px]"></img>
-            <img src={ctrl} className="w-[25px]"></img>
-          </div>
-        </button>
-        <SearchList searchList={searchList} setSelected={setSelected} selected={selected} />
+        <Button searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>
+        <SearchList
+          searchList={searchList}
+          setSelected={setSelected}
+          selected={selected}
+        />
       </div>
       <div className="ml-[300px]">
         <Results selected={selected} isLoading={isLoading} />
