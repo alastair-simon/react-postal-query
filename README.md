@@ -14,7 +14,7 @@
 
 -   Fork and clone this repo using `git clone https://github.com/alastair-simon/react-postal-query.git`
 -   `npm install` in the client folder to install all dependencies
--   `npm start` to run the react app locally
+-   `npm run dev` to run the react app locally
 
 ## Tools used for this project
 
