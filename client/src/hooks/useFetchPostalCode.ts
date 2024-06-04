@@ -5,6 +5,7 @@ import { SearchType } from "../types/SearchType";
 export function useFetchPostalCodeData() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchList, setSearchList] = useState<SearchType[]>([]);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const fetchData = useCallback(
     async (
@@ -33,5 +34,5 @@ export function useFetchPostalCodeData() {
     []
   );
 
-  return { isLoading, fetchData, searchList };
+  return { isLoading, fetchData, searchList, isError };
 }

@@ -13,7 +13,7 @@ export default function Home() {
   const [country, setCountry] = useState<string>("US");
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<SearchType | null>(null);
-  const { isLoading, fetchData, searchList } = useFetchPostalCodeData();
+  const { isLoading, fetchData, searchList, isError } = useFetchPostalCodeData();
 
   function handleSubmit(e:FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -47,6 +47,7 @@ export default function Home() {
           setCountry={setCountry}
           onSubmit={handleSubmit}
           setSearchOpen={setSearchOpen}
+          isError={isError}
         />
       )}
       <div

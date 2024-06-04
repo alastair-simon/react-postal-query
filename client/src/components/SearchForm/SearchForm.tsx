@@ -9,6 +9,7 @@ type propsType = {
   setPostcode: (postcode: string) => void;
   onSubmit: (e: any) => void;
   setSearchOpen: (value: boolean) => void;
+  isError: boolean;
 };
 
 export default function SearchForm({
@@ -18,6 +19,7 @@ export default function SearchForm({
   setPostcode,
   onSubmit,
   setSearchOpen,
+  isError
 }: propsType) {
 
   //no input
@@ -52,7 +54,12 @@ export default function SearchForm({
           ></input>
           {inputMissing && (
             <p className="w-full text-locaBlue text-center">
-              Fill in the postcode
+              Enter a postcode.
+            </p>
+          )}
+          {isError && (
+            <p className="w-full text-locaBlue text-center">
+              Please enter a valid postcode.
             </p>
           )}
           <select
@@ -66,14 +73,17 @@ export default function SearchForm({
         </form>
         <div className="w-full h-[50px] pr-[10px] pl-[10px] bg-locaLight border-t-[1px] border-t-locaMidLight flex flex-row justify-between items-center">
           <div className="flex flex-row gap-2 items-center">
-            <button className="flex flex-row gap-2" onClick={() => setSearchOpen(false)}>
+            <button
+              className="flex flex-row gap-2"
+              onClick={() => setSearchOpen(false)}
+            >
               <img src={esc} className="w-[25px]" />
               <p className="text-locaMed text-[14px]">to exit</p>
             </button>
           </div>
           <div className="flex flex-row gap-2 items-center">
-              <img src={enter} className="w-[25px]" />
-              <p className="text-locaMed text-[14px]">to search</p>
+            <img src={enter} className="w-[25px]" />
+            <p className="text-locaMed text-[14px]">to search</p>
           </div>
         </div>
       </div>
