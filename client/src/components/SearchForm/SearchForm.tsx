@@ -1,6 +1,7 @@
 import enter from "../../assets/enter.svg";
 import esc from "../../assets/esc.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useKey } from "../../hooks/useKey";
 
 type propsType = {
   country: string;
@@ -22,25 +23,22 @@ export default function SearchForm({
   isError
 }: propsType) {
 
-  //no input
+  //No input
   const [inputMissing, setInputMissing] = useState<boolean>(false);
 
-  //check if enter is pressed
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && postcode) {
-        onSubmit(e);
-      } else if (e.key === "Enter" && !postcode){
-        setInputMissing(true);
-      } else if (e.key === "Escape") {
-        setSearchOpen(false);
-      }
-    };
-    document.body.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onSubmit]);
+  //If enter pressed
+  useKey(null, "Enter", (e) => {
+    if (postcode) {
+      onSubmit(e);
+    } else {
+      setInputMissing(true);
+    }
+  });
+
+  //if Esc pressed
+  useKey(null, "Escape", () => {
+    setSearchOpen(false);
+  });
 
   return (
     <div className="w-full h-screen fixed z-50 flex flex-col justify-center items-center bg-locaDark/75 backdrop-blur-sm">

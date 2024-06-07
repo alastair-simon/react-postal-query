@@ -6,6 +6,7 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import Results from "../Results/Results";
 import SearchList from "../../components/SearchList/SearchList";
 import Button from "../../components/Button/Button";
+import { useKey } from "../../hooks/useKey";
 
 export default function Home() {
 
@@ -24,18 +25,9 @@ export default function Home() {
       setSearchOpen(!searchOpen);
     }
   }
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        setSearchOpen(!searchOpen);
-      }
-    };
-    document.body.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [searchOpen]);
+  
+  //Key press hook
+  useKey('meta', 'k', ()=>setSearchOpen(!searchOpen));
 
   return (
     <div className="w-full">
