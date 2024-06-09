@@ -1,69 +1,40 @@
 import { useEffect, useState, FormEvent } from "react";
-import { useFetchPostalCodeData } from "../../hooks/useFetchPostalCode";
 import { SearchType } from "../../types/SearchType";
+
 //components
-import SearchForm from "../../components/SearchForm/SearchForm";
+import SearchForm from "../../components/SearchForm/SearchForm1";
+import SearchForm3 from "../../components/SearchForm/SearchForm3";
 import Results from "../Results/Results";
 import SearchList from "../../components/SearchList/SearchList";
 import Button from "../../components/Button/Button";
-import { useKey } from "../../hooks/useKey";
+import { useKeys } from "../../hooks/useKeys";
 
-export default function Home() {
 
-  const [postcode, setPostcode] = useState<string>("");
-  const [country, setCountry] = useState<string>("US");
-  const [searchOpen, setSearchOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<SearchType | null>(null);
-  const { isLoading, fetchData, searchList, isError, setIsError } = useFetchPostalCodeData();
+export default function Home({setList, list, selected, setSelected}) {
 
-  function handleSubmit(e:FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (country && postcode) {
-      fetchData(country, postcode, setSelected);
-      setPostcode("");
-      setCountry("US")
-      setSearchOpen(!searchOpen);
-    }
-  }
-  
-  //Key press hook
-  useKey('meta', 'k', ()=>setSearchOpen(!searchOpen));
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [selected, setSelected] = useState<SearchType | null>(null);
+  // const [list, setList] = useState<SearchType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useKeys(["Meta", "k"], ()=>setIsOpen(!isOpen));
 
   return (
     <div className="w-full">
-
-      {searchOpen && (
-        <SearchForm
-        postcode={postcode}
-        setPostcode={setPostcode}
-        country={country}
-        setCountry={setCountry}
-        onSubmit={handleSubmit}
-        setSearchOpen={setSearchOpen}
-        isError={isError}
-        />
-      )}
+      <SearchForm3
+        setList={setList}
+        setIsOpen={setIsOpen}
+        setSelected={setSelected}
+        isOpen={isOpen}
+      />
       <div
         id="sidebar"
         className="w-[320px] h-screen fixed pl-[15px] pr-[15px] pt-[40px] z-40 bg-locaDark border-r-[1.5px] border-locaMidAlt"
-        >
-        <Button searchOpen={searchOpen} setSearchOpen={setSearchOpen} setIsError={setIsError} />
-        <SearchList
-          searchList={searchList}
-          setSelected={setSelected}
-          selected={selected}
-          />
+      >
+        <Button isOpen={isOpen} setIsOpen={setIsOpen} />
+        <SearchList list={list} setSelected={setSelected} selected={selected} />
       </div>
-      <div className="ml-[300px]">
-        <Results selected={selected} isLoading={isLoading} />
-        {isError && (
-          <div className="w-[340px] h-[50px] absolute m-auto bottom-[20px] left-[330px] right-0 bg-locaMed rounded-[10px]">
-            <button className="w-full h-full" onClick={() => setIsError(false)}>
-              <p>Error no results matched that postcode</p>
-            </button>
-          </div>
-        )}
-      </div>
+      {/* <Results selected={selected} isLoading={isLoading} /> */}
+      {/* <div className="ml-[300px]"></div> */}
     </div>
   );
 }
