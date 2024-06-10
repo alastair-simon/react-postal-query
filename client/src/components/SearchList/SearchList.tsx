@@ -1,9 +1,9 @@
-import SearchListItem from "../SearchListItem/SearchListItem";
 import { useContext } from "react";
 import { SearchContext } from "../../components/Context";
+import SearchListItem from "../SearchListItem/SearchListItem";
 
 export default function SearchList() {
-  const { searchResults } = useContext(SearchContext);
+  const { searchResults, selected, setSelected } = useContext(SearchContext);
 
   return (
     <div>
@@ -16,6 +16,8 @@ export default function SearchList() {
             <li key={index} className="mb-[4px]">
               <SearchListItem
                 search={search}
+                selected={selected}
+                setSelected={setSelected}
               />
             </li>
           ))}

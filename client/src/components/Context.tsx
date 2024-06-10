@@ -5,27 +5,31 @@ import { SearchType } from "../types/SearchType";
 export type SearchContextType = {
   searchResults: SearchType[] | null;
   setSearchResults: React.Dispatch<React.SetStateAction<SearchType[]>>;
-}
-
-// Initial context value
-const initialContextValue: SearchContextType = {
-  searchResults: [],
-  setSearchResults: () => {}, 
+  selected: number | null;
+  setSelected: React.Dispatch<React.SetStateAction<number | null>>;
 };
-
-export const SearchContext = createContext(initialContextValue);
 
 //Search provider type
 type propsType = {
   children: ReactNode;
 }
 
-export function SearchProvider({ children }: propsType) {
+// Initial context value
+const initialContextValue: SearchContextType = {
+  searchResults: [],
+  setSearchResults: () => {},
+  selected: null,
+  setSelected: () => {},
+};
 
+export const SearchContext = createContext(initialContextValue);
+
+export function SearchProvider({ children }: propsType) {
   const [searchResults, setSearchResults] = useState<SearchType[]>([]);
+  const [selected, setSelected] = useState<number | null >(null);
 
   return (
-    <SearchContext.Provider value={{ searchResults, setSearchResults }}>
+    <SearchContext.Provider value={{ searchResults, setSearchResults, selected, setSelected }}>
       {children}
     </SearchContext.Provider>
   );
