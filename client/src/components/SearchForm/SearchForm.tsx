@@ -10,6 +10,7 @@ import { useFetchPostalCodeData } from "../../hooks/useFetchPostalCode";
 import { Dialog, DialogPanel, Input, Select } from "@headlessui/react";
 import { SearchContext } from "../Context";
 import esc from "../../assets/esc.svg";
+import enter from "../../assets/enter.svg"
 
 //props type
 type PropsType = {
@@ -41,7 +42,7 @@ export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
       console.error("No data found for the given postcode and country.");
       return;
     }
-    
+
     //check if this postcode was already searched
     const alreadySearched = searchResults?.some(
       (item) => item.id === fetchedData.id
@@ -117,6 +118,7 @@ export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
                 className="data-[hover]:shadow data-[focus]:bg-blue-100 w-full h-[55px] pl-[10px] pr-[10px] mb-[20px] rounded-[12px] bg-locaDark text-locaMed focus:outline-none focus:ring-1 focus:ring-locaBlue focus:border-locaBlue"
                 aria-label="Country"
                 {...register("country")}
+                onKeyDown={preventEnterKey}
               >
                 <option value="US">United States</option>
                 <option value="DE">Germany</option>
@@ -135,7 +137,7 @@ export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
                 </button>
               </div>
               <div className="flex flex-row gap-2 items-center">
-                <p>cmd + e</p>
+                <img src={enter} className="w-[25px]" />
                 <p className="text-locaMed text-[14px]">to search</p>
               </div>
             </div>

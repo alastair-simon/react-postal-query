@@ -1,5 +1,6 @@
 import { SearchType } from "../../types/SearchType";
 import { useNavigate } from "react-router-dom";
+import pin from "../../assets/pin.svg"
 
 //props type
 type propsType = {
@@ -26,8 +27,8 @@ export default function SearchListItem({ search, selected, setSelected }: propsT
         className={`w-full h-[78px] pl-[10px] text-locaWhite ${activeClass} flex flex-row items-center gap-4 rounded-[8px]`}
         onClick={() => handleClick()}
       >
-        <div className="w-[48px] h-[48px] bg-locaWhite rounded-[6px]">
-
+        <div className="w-[48px] h-[48px] flex justify-center items-center bg-locaWhite rounded-[6px]">
+          <img src={pin} className="w-[20px]"></img>
         </div>
         <div className="text-[14px] font-medium flex flex-col justify-start text-left">
           <p>{search?.["post code"]}</p>

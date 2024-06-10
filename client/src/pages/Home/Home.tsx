@@ -1,4 +1,4 @@
-
+import pin from "../../assets/pin.svg"
 export default function Home() {
 
   return (
@@ -7,10 +7,8 @@ export default function Home() {
         id="placeholder-wrap"
         className="w-full h-screen pl-[50px] flex flex-row justify-center items-center text-locaWhite"
       >
-        <div className="w-[240px] h-[120px] flex flex-row justify-center items-center gap-2 rounded-[20px] border-[1px] border-locaMidLight">
-          <p className="text-[18px] text-center font-regular text-locaMidLight">
-            K + ⌘ to start <br></br> a new search
-          </p>
+        <div className="flex flex-col justify-center items-center">
+          <img src={pin} className="w-[200px] mb-[20px]"></img>
         </div>
       </div>
     </div>
