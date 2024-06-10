@@ -6,8 +6,7 @@ export function useFetchPostalCodeData() {
   const [searchList, setSearchList] = useState<SearchType[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const fetchData = useCallback(
-    async (
+  const fetchData = useCallback(async (
       country: string,
       postcode: string,
     ) => {
@@ -28,16 +27,14 @@ export function useFetchPostalCodeData() {
         const data = await res.json();
         const id = Math.floor(Math.random() * 10000);
         const objWithId = { ...data, id };
-        setSearchList((prevSearchList) => [...prevSearchList, objWithId]);
-        
+        return objWithId;
       } catch (error) {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
-    },
-    []
+    },[]
   );
 
-  return { isLoading, fetchData, searchList, isError, setIsError };
+  return { isLoading, fetchData, isError, setIsError };
 }

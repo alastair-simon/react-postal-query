@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-import Home from "./pages/Home/Home";
 import App from "./pages/App";
+import { SearchProvider } from "./components/Context";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
+    <SearchProvider>
       <App/>
-    </Router>
+    </SearchProvider>
   </React.StrictMode>
 );

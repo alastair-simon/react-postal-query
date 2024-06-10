@@ -1,40 +1,18 @@
-import { useEffect, useState, FormEvent } from "react";
-import { SearchType } from "../../types/SearchType";
 
-//components
-import SearchForm from "../../components/SearchForm/SearchForm1";
-import SearchForm3 from "../../components/SearchForm/SearchForm3";
-import Results from "../Results/Results";
-import SearchList from "../../components/SearchList/SearchList";
-import Button from "../../components/Button/Button";
-import { useKeys } from "../../hooks/useKeys";
-
-
-export default function Home({setList, list, selected, setSelected}) {
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [selected, setSelected] = useState<SearchType | null>(null);
-  // const [list, setList] = useState<SearchType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  useKeys(["Meta", "k"], ()=>setIsOpen(!isOpen));
+export default function Home() {
 
   return (
-    <div className="w-full">
-      <SearchForm3
-        setList={setList}
-        setIsOpen={setIsOpen}
-        setSelected={setSelected}
-        isOpen={isOpen}
-      />
+    <div className="ml-[300px]">
       <div
-        id="sidebar"
-        className="w-[320px] h-screen fixed pl-[15px] pr-[15px] pt-[40px] z-40 bg-locaDark border-r-[1.5px] border-locaMidAlt"
+        id="placeholder-wrap"
+        className="w-full h-screen pl-[50px] flex flex-row justify-center items-center text-locaWhite"
       >
-        <Button isOpen={isOpen} setIsOpen={setIsOpen} />
-        <SearchList list={list} setSelected={setSelected} selected={selected} />
+        <div className="w-[240px] h-[120px] flex flex-row justify-center items-center gap-2 rounded-[20px] border-[1px] border-locaMidLight">
+          <p className="text-[18px] text-center font-regular text-locaMidLight">
+            K + ⌘ to start <br></br> a new search
+          </p>
+        </div>
       </div>
-      {/* <Results selected={selected} isLoading={isLoading} /> */}
-      {/* <div className="ml-[300px]"></div> */}
     </div>
   );
 }
