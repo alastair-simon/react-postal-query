@@ -1,7 +1,7 @@
 import enter from "../../assets/enter.svg";
 import esc from "../../assets/esc.svg";
 import { useState } from "react";
-import { useKey } from "../../hooks/useKey";
+import { useKeys } from "../../hooks/useKeys";
 
 type propsType = {
   country: string;
@@ -27,7 +27,7 @@ export default function SearchForm({
   const [inputMissing, setInputMissing] = useState<boolean>(false);
 
   //If enter pressed
-  useKey(null, "Enter", (e) => {
+  useKeys(["Enter"], (e) => {
     if (postcode) {
       onSubmit(e);
     } else {
@@ -35,15 +35,15 @@ export default function SearchForm({
     }
   });
 
-  //if Esc pressed
-  useKey(null, "Escape", () => {
+  //If Esc pressed
+  useKeys(["Escape"], () => {
     setSearchOpen(false);
   });
 
   return (
     <div className="w-full h-screen fixed z-50 flex flex-col justify-center items-center bg-locaDark/75 backdrop-blur-sm">
       <div className="w-[460px] bg-locaLight rounded-[12px] overflow-hidden border-[1px] border-locaMidLight">
-        <form className=" p-[10px] flex flex-col gap-3" onSubmit={onSubmit}>
+        <form className="p-[10px] flex flex-col gap-3" onSubmit={onSubmit}>
           <input
             placeholder="Search postcode"
             className="w-full h-[55px] pl-[20px] box-border rounded-[12px] text-locaMed bg-locaDark placeholder:text-locaMed placeholder-regular focus:outline-none focus:ring-1 focus:ring-locaBlue focus:border-locaBlue"
