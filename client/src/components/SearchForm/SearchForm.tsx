@@ -12,7 +12,6 @@ import { SearchContext } from "../Context";
 import esc from "../../assets/esc.svg";
 import enter from "../../assets/enter.svg"
 
-//props type
 type PropsType = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isOpen: boolean;
@@ -27,7 +26,7 @@ const schema = yup.object().shape({
   country: yup.string().required("Country is required"),
 });
 
-export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
+export default function SearchForm({ setIsOpen, isOpen }: PropsType) {
   const { searchResults, setSearchResults, setSelected } = useContext(SearchContext);
   const {register, handleSubmit, setValue, reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });
   const { fetchData, isError, setIsError } = useFetchPostalCodeData();
@@ -36,22 +35,18 @@ export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
   //fetch data hook
   async function onFormSubmit(data: any) {
     const fetchedData = await fetchData(data.country, data.postcode);
-
     //no result
     if (!fetchedData) {
       console.error("No data found for the given postcode and country.");
       return;
     }
-
     //check if this postcode was already searched
     const alreadySearched = searchResults?.some(
       (item) => item.id === fetchedData.id
     );
-
     if (!alreadySearched) {
       setSearchResults((prevSearchList) => [...prevSearchList, fetchedData]);
     }
-
     navigate(`/${fetchedData.id}`);
     setSelected(fetchedData.id);
     setIsOpen(false);
@@ -69,7 +64,7 @@ export default function SearchForm3({ setIsOpen, isOpen }: PropsType) {
     reset();
   });
 
-  // Prevent default input submission
+  //Prevent default input submission
   const preventEnterKey = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       event.preventDefault();

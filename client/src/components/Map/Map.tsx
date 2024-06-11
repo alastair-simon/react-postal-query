@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 
+//props type
 type propsType = {
   latitude: string | null;
   longitude: string | null;
@@ -12,7 +13,7 @@ export default function MyMapComponent ({ latitude, longitude }:propsType) {
   //fallback position
   const defaultPosition: [number, number] = [51.505, -0.09];
 
-  //check if long and lat are there
+  //check if long and lat present
   const position: [number, number] = latitude && longitude ? [parseFloat(latitude), parseFloat(longitude)] : defaultPosition;
 
   //update map every time lat and long changed

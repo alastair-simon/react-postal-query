@@ -1,6 +1,7 @@
 import MyMapComponent from "../Map/Map";
 import { Place } from "../../types/SearchType";
 
+//prop type
 type propsType = {
   place: Place;
   postcode: string;

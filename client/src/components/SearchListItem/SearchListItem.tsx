@@ -15,7 +15,7 @@ export default function SearchListItem({ search, selected, setSelected }: propsT
   //check search active
   const activeClass = selected === search?.id ? "bg-locaLight" : "";
 
-  //change search to clicked
+  //navigate to clicked
   const handleClick = () => {
     const curSearch = search?.id;
     navigate(`/${curSearch}`);

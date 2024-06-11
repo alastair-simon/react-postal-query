@@ -30,7 +30,6 @@ export function useFetchPostalCodeData() {
       const id = Math.floor(Math.random() * 10000);
       const objWithId = { ...data, id };
       cache.current[cacheKey] = objWithId;
-
       return objWithId;
     } catch (error) {
       setIsError(true);

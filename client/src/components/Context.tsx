@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode } from "react";
 import { SearchType } from "../types/SearchType";
 
 // Context type
@@ -9,11 +9,6 @@ export type SearchContextType = {
   setSelected: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-//Search provider type
-type propsType = {
-  children: ReactNode;
-}
-
 // Initial context value
 const initialContextValue: SearchContextType = {
   searchResults: [],
@@ -23,6 +18,11 @@ const initialContextValue: SearchContextType = {
 };
 
 export const SearchContext = createContext(initialContextValue);
+
+//Search provider type
+type propsType = {
+  children: ReactNode;
+}
 
 export function SearchProvider({ children }: propsType) {
   const [searchResults, setSearchResults] = useState<SearchType[]>([]);

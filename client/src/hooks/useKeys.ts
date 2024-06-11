@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 export function useKeys(keys: string[], action: (e: KeyboardEvent | null) => void) {
   useEffect(() => {
+    //create new set
     const pressedKeys = new Set();
 
     const handleKeyDown = (e: KeyboardEvent) => {

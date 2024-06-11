@@ -1,3 +1,4 @@
+//place type
 export type Place = {
   "place name": string;
   longitude: string;
@@ -6,6 +7,7 @@ export type Place = {
   latitude: string;
 };
 
+//search type
 export type SearchType = {
     "post code": "90210";
     "country": "United States";

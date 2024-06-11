@@ -1,4 +1,5 @@
 import { useContext } from "react";
+//components
 import { SearchContext } from "../../components/Context";
 import SearchListItem from "../SearchListItem/SearchListItem";
 

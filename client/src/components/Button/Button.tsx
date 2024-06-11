@@ -2,6 +2,7 @@ import ctrl from "../../assets/ctrl.svg";
 import k from "../../assets/k.svg";
 import search from "../../assets/search.svg";
 
+//prop type
 type propsType = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;

@@ -7,11 +7,10 @@ import { PlaceItem } from "../../components/PlaceItem/PlaceItem";
 import { SearchType, Place } from "../../types/SearchType";
 
 export default function Results() {
-
   const { id } = useParams();
-  const {searchResults} = useContext(SearchContext);
+  const { searchResults } = useContext(SearchContext);
+  //find search from list using params
   const selected = searchResults?.find((search: SearchType) => search.id === Number(id));
-
   return (
     <div className="ml-[300px]">
       <div

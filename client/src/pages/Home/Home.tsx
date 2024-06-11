@@ -1,6 +1,6 @@
 import pin from "../../assets/pin.svg"
-export default function Home() {
 
+export default function Home() {
   return (
     <div className="ml-[300px]">
       <div
