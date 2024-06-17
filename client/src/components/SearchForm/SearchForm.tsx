@@ -28,7 +28,7 @@ const schema = yup.object().shape({
 
 export default function SearchForm({ setIsOpen, isOpen }: PropsType) {
   const { searchResults, setSearchResults, setSelected } = useContext(SearchContext);
-  const {register, handleSubmit, setValue, reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });
+  const {register, handleSubmit, reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });
   const { fetchData, isError, setIsError } = useFetchPostalCodeData();
   const navigate = useNavigate();
 
